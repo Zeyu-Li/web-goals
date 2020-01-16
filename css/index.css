@@ -4,6 +4,24 @@ h1 {
     margin-bottom: 3vh!important;
 }
 
+.main {
+    display: block;
+    margin: 0 auto!important;
+    max-width: 90vw;
+}
+
+input {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+
+table {
+    border-collapse:collapse;
+    width: 90vw;
+}
+
+/* buttons */
 .btn-circle.btn-xl {
     width: 70px;
     height: 70px;
@@ -20,6 +38,38 @@ h1 {
     float: right;
 }
 
+.buttons ul {
+    list-style-type: none;
+}
+
+#topper {
+    z-index: 99!important;
+    padding: 7.5px;
+    padding-top: 15px;
+    background-color: black;
+    margin-bottom: 60vh;
+    border-radius: 10px;
+}
+
+/* end of buttons */
+
 #first {
     margin-bottom: 3vh;
 }
+
+#ind_goal {
+    border: 5px solid #1FB7CE;
+    border-radius: 12px;
+    padding: 15px;
+
+}
+
+.ind_goal p {
+
+}
+
+/* editor */
+.editor-toolbar {
+    z-index: 0!important;
+}
+

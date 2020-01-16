@@ -10,25 +10,48 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/index.css" type="text/css">
     <link rel="stylesheet" href="editor.md/css/editormd.min.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
 </head>
 
 <body>
 
-    <!-- Medium Goals -->
-    <h1>GOALS:</h1>
-    <!-- TODO list -->
-    <h1>TODO:</h1>
-
-    <!-- Text Area -->
-    <div id="editor">
-        <textarea style="display:none;"></textarea>
+    <div class="main">
+        <!-- Medium timed Goals -->
+        <h1>GOALS:</h1>
+        <div class="goals">
+            <div id="ind_goal">
+                <div><input type="checkbox" name="goal1" value="goal1" style="float: left;"></div>
+                
+                <div>
+                    <p>Code and Stuff<br>
+                    <b>DUE SEPT 1</b></p>
+                </div>
+            </div>
+            
+        </div>
+    
+        <!-- TODO list -->
+        <h1>TODO:</h1>
+    
+        <!-- Text Area -->
+        <div id="editor">
+            <textarea style="display:none;"></textarea>
+        </div>
+    
     </div>
 
     <!-- 2 button, 1 (+) item, 1 save -->
     <div class="buttons">
         <ul>
+            <li id="topper">
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="True">
+                        <label class="custom-control-label" for="customSwitch1">Night Mode</label>
+                    </div>
+                </div>
+            </li>
             <li id="first"><button type="button" class="btn btn-success btn-circle btn-xl"><b>+</b></button></li>
             <li><button type="button" class="btn btn-primary btn-circle btn-xl"><b>S+</b></button></li>
         </ul>
@@ -41,6 +64,7 @@
 
     <!-- editormd -->
     <script src="editor.md/editormd.min.js"></script>
+    <script src="editor.md/languages/en.js"></script>
     <script src="js/index.js"></script>
     <script type="text/javascript">
         $(function() {
@@ -52,6 +76,7 @@
             });
         });
     </script>
+    <script src="js/dark.js"></script>
 
 </body>
 </html>
