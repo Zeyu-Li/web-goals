@@ -1,0 +1,25 @@
+h1 {
+    text-align: center; 
+    margin-top: 5vh!important; 
+    margin-bottom: 3vh!important;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.buttons {
+    position: sticky;
+    bottom: 5vh;
+    margin: 5vh;
+    float: right;
+}
+
+#first {
+    margin-bottom: 3vh;
+}
