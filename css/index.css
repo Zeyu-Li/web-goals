@@ -4,6 +4,12 @@ h1 {
     margin-bottom: 3vh!important;
 }
 
+body {
+
+    -webkit-transition: 1s; /* Safari prior 6.1 */
+    transition: 1s;
+}
+
 .main {
     display: block;
     margin: 0 auto!important;
