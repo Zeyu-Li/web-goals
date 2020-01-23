@@ -38,7 +38,10 @@
         <div id="editor">
             <textarea style="display:none;"></textarea>
         </div>
-    
+        <div class="copy">
+            <button title="Copy to Clipboard" type="button" class="btn btn-secondary">Copy</button>
+        </div>
+        
     </div>
 
     <!-- 2 button, 1 (+) item, 1 save -->
@@ -46,14 +49,14 @@
         <ul>
             <li id="topper">
                 <div class="form-group">
-                    <div class="custom-control custom-switch">
+                    <div class="custom-control custom-switch" title="Toggle Night Mode">
                         <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="True">
                         <label class="custom-control-label" for="customSwitch1">Night Mode</label>
                     </div>
                 </div>
             </li>
-            <li id="first"><button type="button" class="btn btn-success btn-circle btn-xl"><b>+</b></button></li>
-            <li><button type="button" class="btn btn-primary btn-circle btn-xl"><b>S+</b></button></li>
+            <li id="first"><button title="Add Event" type="button" class="btn btn-success btn-circle btn-xl"><b>+</b></button></li>
+            <li id ="second"><a title="Save Markdown File" href="javascript:void(0)" download="TODO.md" style="z-index: 100;"><button type="button" class="btn btn-primary btn-circle btn-xl"><b>S+</b></button></a></li>
         </ul>
     </div>
 
