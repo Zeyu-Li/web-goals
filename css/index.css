@@ -5,15 +5,14 @@ h1 {
 }
 
 body {
-
     -webkit-transition: 1s; /* Safari prior 6.1 */
     transition: 1s;
 }
 
 .main {
+    max-width: 89vw;
+    margin: auto!important;
     display: block;
-    margin: 0 auto!important;
-    max-width: 90vw;
 }
 
 input {
@@ -67,11 +66,35 @@ table {
     border: 5px solid #1FB7CE;
     border-radius: 12px;
     padding: 15px;
+    padding-top: 30px;
+    padding-bottom: 90px;
+    margin: auto!important;
 
 }
 
-.ind_goal p {
+.check_box {
+    float: left;
+    width: 48%;
+    text-align: center;
+    margin-left: 21vw;
+    margin-top: 15px;
+}
 
+.main_box {
+    width: 25px;
+    height: 25px;
+}
+
+.txt {
+    float: right;
+    width: 48%;
+    text-align: center;
+    margin-top: -55px;
+    margin-right: 70px;
+}
+
+.txt p {
+    font-size: 30px;
 }
 
 /* editor */
