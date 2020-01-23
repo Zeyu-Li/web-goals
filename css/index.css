@@ -1,3 +1,4 @@
+/* html elements */
 h1 {
     text-align: center; 
     margin-top: 5vh!important; 
@@ -9,6 +10,7 @@ body {
     transition: 1s;
 }
 
+/* main is part of body */
 .main {
     max-width: 89vw;
     margin: auto!important;
@@ -47,6 +49,7 @@ table {
     list-style-type: none;
 }
 
+/* toggle area */
 #topper {
     z-index: 99!important;
     padding: 7.5px;
@@ -56,10 +59,16 @@ table {
     border-radius: 10px;
 }
 
-/* end of buttons */
-
 #first {
     margin-bottom: 3vh;
+}
+/* end of buttons */
+
+/* goals */
+
+.main_box {
+    width: 25px;
+    height: 25px;
 }
 
 #ind_goal {
@@ -80,11 +89,6 @@ table {
     margin-top: 15px;
 }
 
-.main_box {
-    width: 25px;
-    height: 25px;
-}
-
 .txt {
     float: right;
     width: 48%;
@@ -96,9 +100,9 @@ table {
 .txt p {
     font-size: 30px;
 }
+/* end of goals */
 
 /* editor */
 .editor-toolbar {
     z-index: 0!important;
 }
-
