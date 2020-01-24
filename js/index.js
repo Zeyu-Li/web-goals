@@ -11,6 +11,11 @@ $.get('../markdown/TODO.md', function (data) {
 }, 'text');
 
 /* Start of buttons */
+$('.main_box').click(function() {
+    // check box
+    $('#ind_goal').css('background-color', 'green');
+});
+
 // add event
 $('#first button').click(function() {
     // TODO: trigger prompt
@@ -50,6 +55,11 @@ $('#customSwitch1').click(function() {
     }
 });
 // end of toggle dark mode
+
+// expand finished goals
+$('#finished_goals > p').click(function() {
+    $('.finished_goals').slideToggle();
+});
 
 /* End of buttons */
 

@@ -29,6 +29,10 @@ table {
 }
 
 /* buttons */
+.buttons ul {
+    text-align: center;
+}
+
 .btn-circle.btn-xl {
     width: 70px;
     height: 70px;
@@ -41,7 +45,7 @@ table {
 .buttons {
     position: sticky;
     bottom: 5vh;
-    margin: 5vh;
+    margin-right: 2vw;
     float: right;
 }
 
@@ -72,32 +76,35 @@ table {
 }
 
 #ind_goal {
-    border: 5px solid #1FB7CE;
-    border-radius: 12px;
-    padding-bottom: 10vh;
-    margin: auto!important;
     position: relative;
-
+    margin: auto!important;
+    border: 5px solid #1FB7CE;
+    border-radius: 15px;
+    padding-bottom: 5vh;
+    -webkit-transition: 1s;
+    transition: 1s;
 }
 
 .check_box {
     position: absolute;
     float: left;
-    width: 20%;
-    top: 40%;
+    width: 20vw;
+    top: 35%;
     padding-left: 5vw;
 }
 
 .txt {
-    width: 50%;
-    text-align: center;
-    margin-top: 5px;
-    margin-right: 70px;
+    top: 35%;
+    width: 50vw;
+    margin-top: 5vh;
+    margin-left: 18vw;
 }
 
 .delete {
-    float:right;
-    width: 10%;
+    position: absolute;
+    float: right;
+    top: 30%;
+    margin-left: 70vw;
 }
 
 .txt p {
@@ -115,6 +122,28 @@ table {
 }
 
 /* other */
-.glyphicon-trash {
-    color: white;
+.trash {
+    width: 75px!important;
+    height: 75px!important;
+}
+
+#finished_goals {
+    margin-top: 5vh;
+}
+
+#finished_goals > p {
+    cursor: pointer;
+    font-size: 25px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+#finished_goals > p:hover {
+    color: dimgrey;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.finished_goals {
+    display: none;
 }

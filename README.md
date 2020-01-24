@@ -1,23 +1,15 @@
-﻿
-# Website Boilerplate
+
+# Goals Project
 
 ## About
 
-This project folder is a boilerplate for web projects. 
-It is free to use (MIT Licence)
+This project is a web app that tracks your goals and has a TODO editor in markdown
 
-Contains all components of a web-based system
+## Libs
 
-* css - stores css
-* images- stores image files
-* js - stores js files
-* jslib - stores js libraries
-
-Nothing more, nothing less
-
-## Usage
-
-If no js lib is used, delete the jslib directory
+* jQuery
+* [Editor.md](https://github.com/pandao/editor.md)
+* jQuery datetimepicker
 
 ## Licence
 
