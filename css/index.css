@@ -17,7 +17,7 @@ body {
     display: block;
 }
 
-input {
+.main input {
     width: 15px;
     height: 15px;
     vertical-align: middle;
@@ -99,6 +99,10 @@ table {
 
 .txt p {
     font-size: 30px;
+}
+
+#datetimepicker {
+    border-radius: 5px;
 }
 /* end of goals */
 

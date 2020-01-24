@@ -14,7 +14,7 @@ $.get('../markdown/TODO.md', function (data) {
 // add event
 $('#first button').click(function() {
     // TODO: trigger prompt
-    $('#datetimepicker4').datetimepicker();
+    $('#datetimepicker').datetimepicker();
 });
 
 $('#second button').click(function(e) {
