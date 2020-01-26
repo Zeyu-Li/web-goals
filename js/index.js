@@ -2,11 +2,6 @@
 var goals = localStorage.goals;
 var fgoals = localStorage.fgoals;
 
-// get completed and goals that need to be done
-$(document).ready(function () {
-    get_data();
-});
-
 // data for info
 function get_data() {
     goals = goals.split(',');
@@ -18,7 +13,7 @@ function get_data() {
     }
     split_goal = split_goal.sort().reverse();
     $('.goals').empty();
-    var i = 0;
+    let i = 0;
     for (var to_print_goal of split_goal) {
 
         if (to_print_goal[0] =="") {
@@ -26,9 +21,9 @@ function get_data() {
         }
 
         let date = to_print_goal[0];
-        var dob = new Date(date);
-        var dobArr = dob.toDateString().split(' ');
-        var dobFormat = dobArr[1] + ' ' + dobArr[2]  + ' ' + dobArr[3];
+        let dob = new Date(date);
+        let dobArr = dob.toDateString().split(' ');
+        let dobFormat = dobArr[1] + ' ' + dobArr[2]  + ' ' + dobArr[3];
         $('.goals').prepend(
             `<div class="ind_goal" id="goal_number_`+i+`">
                 <div class="check_box"><input class="main_box goal_`+i+`" type="checkbox" name="goal`+i+`" value="goal`+i+`" style="float: left;"></div>
@@ -36,17 +31,7 @@ function get_data() {
                     <p>` + to_print_goal[1] + `<br><br>
                     <b>DUE: `+dobFormat+`</b></p>
                 </div>
-                <div class="delete">
-                    <a id="de_goals`+i+`" class="trashy" title="Delete Goals" style="z-index: 100;">
-                        <button type="button" class="btn btn-light trash delete`+i+`">
-                            <img src="images/trash_bin.svg" id="trash_can">
-                        </button>
-                    </a>
-                </div>
                 <script>
-                    $('#de_goals`+i+`').click(function() {
-                        delete_goals("`+to_print_goal[1]+`","`+to_print_goal[0]+`");
-                    });
                     $('.goal_`+i+`').click(function() {
                         // check box
                         $('#goal_number_`+ i +`').css('background-color', 'green');
@@ -69,14 +54,57 @@ function find_goals(goals, to_delete) {
     }
 }
 
+function finished() {
+    fgoals = fgoals.split(',');
+
+    var split_f_goal = [];
+    console.log(fgoals);
+    for (let f_goal of fgoals) {
+        split_f_goal.push(f_goal.split(';').reverse());
+    }
+    split_f_goal = split_f_goal.sort().reverse();
+    $('.finished_goals').empty();
+    let i = 0;
+    for (let to_f_goal of split_f_goal) {
+
+        if (to_f_goal[0] =="") {
+            break;
+        }
+
+        let date = to_f_goal[0];
+        let ddob = new Date(date);
+        let dobArr = ddob.toDateString().split(' ');
+        let dobFormat = dobArr[1] + ' ' + dobArr[2]  + ' ' + dobArr[3];
+        $('.finished_goals').prepend(
+            `<div class="ind_goal" id="goal_number_`+i+`">
+                <div class="txt">
+                    <p>` + to_f_goal[1] + `<br><br>
+                    <b>DUE: `+dobFormat+`</b></p>
+                </div>
+            </div>`
+        );
+        i++;
+    }
+
+}
+
 function delete_goals(message, datetime) {
     // add goals to screen and storage
     var to_delete = [message+';'+datetime];
     var index = find_goals(goals, to_delete);
-    goals.pop(index);
+    let to_done = goals.pop(index);
     localStorage.goals = goals;
     goals = localStorage.goals;
     get_data();
+    add_f_goals(to_done);
+}
+
+function add_f_goals(to_done) {
+    // add goals to screen and storage
+    fgoals.push([to_done]);
+    localStorage.fgoals = fgoals;
+    fgoals = localStorage.fgoals;
+    finished();
 }
 
 function add_goals(message, datetime) {
@@ -175,4 +203,10 @@ $(".backtotop").click(function() {
     return $("html, body").animate({
         scrollTop: 0
     }, 300), !1;
+});
+
+// get completed and goals that need to be done
+$(document).ready(function () {
+    get_data();
+    finished();
 });
