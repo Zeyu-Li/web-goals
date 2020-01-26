@@ -21,21 +21,15 @@
         <!-- Medium timed Goals -->
         <h1>GOALS:</h1>
         <div class="goals">
-            <div id="ind_goal">
-                <div class="check_box"><input class="main_box" type="checkbox" name="goal1" value="goal1" style="float: left;"></div>
-                
-                <div class="txt">
-                    <p>Code and Stuff<br><br>
-                    <b>DUE SEPT 1</b></p>
-                </div>
-                <div class="delete">
-                    <button type="button" class="btn btn-light trash">
-                        <img src="images/trash_bin.svg" id="trash_can">
-                    </button>
-                </div>
-            </div>
         </div>
-    
+
+        <div class="d_goals">
+            <a id="d_goals" title="Download Goals" href="javascript:void(0)" download="goals.txt" style="z-index: 100;">
+                <button title="Download Goals" type="button" class="btn btn-secondary">Download</button>
+            </a>
+        </div>
+
+        <hr>
         <!-- TODO list -->
         <h1>TODO:</h1>
     
@@ -50,7 +44,7 @@
         <p><a>Finished goals</a></p>
         <div class="finished_goals">
             <div id="ind_goal">
-                
+                <!-- insert goals -->
             </div>
         </div>
         </div>
@@ -72,7 +66,7 @@
                 <form>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Event Name:</label>
-                        <textarea class="form-control" id="message-text datetimepicker"></textarea>
+                        <textarea class="form-control" id="message-text"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Date:</label><br>
@@ -82,13 +76,13 @@
             </div>
             <div class="modal-footer">
                 <button title="Close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button title="Add Event" type="button" class="btn btn-primary">+ Event</button title="Close">
+                <button title="Add Event" type="button" class="btn btn-primary add_event" data-dismiss="modal">+ Event</button title="Close">
             </div>
         </div>
     </div>
 </div>
-</div>
 
+</div>
     <!-- 2 button, 1 (+) add item, 1 save, and 1 element that toggles night mode -->
     <div class="buttons">
         <ul>
@@ -104,6 +98,11 @@
             <li id ="second"><a title="Save Markdown File" href="javascript:void(0)" download="TODO.md" style="z-index: 100;"><button type="button" class="btn btn-primary btn-circle btn-xl"><b>S+</b></button></a></li>
         </ul>
     </div>
+
+    <!-- footer, back to top -->
+    <footer class="footer">
+        <a class="backtotop" href="#">&#9650; Back to top</a></p>
+    </footer>
 
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>    
@@ -127,6 +126,7 @@
         });
     </script>
     <script src="js/dark.js"></script>
+    <div class="script"></div>
 
 </body>
 </html>

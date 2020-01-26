@@ -75,12 +75,13 @@ table {
     height: 55px!important;
 }
 
-#ind_goal {
+.ind_goal {
     position: relative;
     margin: auto!important;
-    border: 5px solid #1FB7CE;
     border-radius: 15px;
     padding-bottom: 5vh;
+    margin-bottom: 5vh!important;
+    border: 5px solid #1FB7CE;
     -webkit-transition: 1s;
     transition: 1s;
 }
@@ -89,7 +90,7 @@ table {
     position: absolute;
     float: left;
     width: 20vw;
-    top: 35%;
+    padding-top: 75px;
     padding-left: 5vw;
 }
 
@@ -103,7 +104,7 @@ table {
 .delete {
     position: absolute;
     float: right;
-    top: 30%;
+    margin-top: -130px;
     margin-left: 70vw;
 }
 
@@ -146,4 +147,15 @@ table {
 
 .finished_goals {
     display: none;
+}
+
+.backtotop {
+    float: right;
+    padding-right: 2px;
+    color: #fff;
+}
+
+.backtotop:hover {
+    
+    text-decoration: none;
 }
