@@ -17,3 +17,11 @@ The rules for copy and distributing this project licence are
 outlined in the licence.txt file.
 
 This project is under an MIT licence
+
+
+
+## ChangeLog
+
+* 1/26/20 - finished core functionality
+* 
+

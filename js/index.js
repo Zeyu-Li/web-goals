@@ -4,6 +4,7 @@ var fgoals = localStorage.fgoals;
 
 // data for info
 function get_data() {
+    let color
     goals = goals.split(',');
 
     var split_goal = [];
@@ -22,10 +23,13 @@ function get_data() {
 
         let date = to_print_goal[0];
         let dob = new Date(date);
+        if (dob.getTime() <= $.now()) {
+            color = "background-color:rgba(255, 243, 112,0.3)";
+        }
         let dobArr = dob.toDateString().split(' ');
         let dobFormat = dobArr[1] + ' ' + dobArr[2]  + ' ' + dobArr[3];
         $('.goals').prepend(
-            `<div class="ind_goal" id="goal_number_`+i+`">
+            `<div class="ind_goal" id="goal_number_`+i+`" style="`+color+`">
                 <div class="check_box"><input class="main_box goal_`+i+`" type="checkbox" name="goal`+i+`" value="goal`+i+`" style="float: left;"></div>
                 <div class="txt">
                     <p>` + to_print_goal[1] + `<br><br>
