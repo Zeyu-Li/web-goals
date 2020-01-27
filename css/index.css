@@ -160,7 +160,7 @@ table {
     text-decoration: none;
 }
 
-/* flash */
+/* flash (Not in use) */
 
 .flash {
     -moz-animation: flash 1s ease-out;
