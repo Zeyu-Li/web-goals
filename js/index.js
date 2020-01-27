@@ -1,10 +1,11 @@
 'use strict';
+
 var goals = localStorage.goals;
 var fgoals = localStorage.fgoals;
 
 // data for info
 function get_data() {
-    let color
+    let color;
     goals = goals.split(',');
 
     var split_goal = [];
@@ -147,7 +148,7 @@ $('#first button').click(function() {
 
 $('.d_goals button').click(function() {
     // download markdown file
-    var data = new Blob([localStorage.goals], {type: 'text/plain;charset=utf-8'});
+    var data = new Blob([localStorage.goals + "`" + localStorage.fgoals], {type: 'text/plain;charset=utf-8'});
     let textFile = URL.createObjectURL(data);
     $('.d_goals a').attr('href', textFile);
 });
@@ -195,11 +196,12 @@ $('#finished_goals > p').click(function() {
 
 // popup event
 $('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
+    var button = $(event.relatedTarget);
+    // Button that triggered the modal
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    modal.find('.modal-title').text('Event')
+    var modal = $(this);
+    modal.find('.modal-title').text('Event');
 });
 
 // back to top
