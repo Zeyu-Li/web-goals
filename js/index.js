@@ -12,7 +12,7 @@ function get_data() {
     // parse through goals
     goals = goals.split(',');
     let split_goal = [];
-    for (var goal of goals) {
+    for (let goal of goals) {
         split_goal.push(goal.split(';').reverse());
     }
     split_goal = split_goal.sort().reverse();
@@ -24,7 +24,7 @@ function get_data() {
     // if it is trivial, don't print anything, otherwise 
     // print the goals out
     let i = 0;
-    for (var to_print_goal of split_goal) {
+    for (let to_print_goal of split_goal) {
         if (to_print_goal[0] =="") {
             break;
         }
@@ -60,7 +60,7 @@ function get_data() {
 function find_goals(goals, to_delete) {
     // find if var to delete is found in goals array
     let j = 0;
-    for (var goal of goals) {
+    for (let goal of goals) {
         if (goal == to_delete) {
             return j;
         };
@@ -69,11 +69,10 @@ function find_goals(goals, to_delete) {
 }
 
 function finished() {
-    // 
+    // similar function to get_data
     fgoals = fgoals.split(',');
 
-    var split_f_goal = [];
-    console.log(fgoals);
+    let split_f_goal = [];
     for (let f_goal of fgoals) {
         split_f_goal.push(f_goal.split(';').reverse());
     }
@@ -105,9 +104,8 @@ function finished() {
 
 function delete_goals(message, datetime) {
     // delete goal from screen and storage
-    var to_delete = [message+';'+datetime];
-    var index = find_goals(goals, to_delete) - 1;
-    console.log(index);
+    let to_delete = [message+';'+datetime];
+    let index = find_goals(goals, to_delete) - 1;
     let to_done = goals.pop(index);
     localStorage.goals = goals;
     goals = localStorage.goals;
@@ -158,14 +156,14 @@ $('#first button').click(function() {
 
 $('.d_goals button').click(function() {
     // download markdown file
-    var data = new Blob([localStorage.goals + "`" + localStorage.fgoals], {type: 'text/plain;charset=utf-8'});
+    let data = new Blob([localStorage.goals + "`" + localStorage.fgoals], {type: 'text/plain;charset=utf-8'});
     let textFile = URL.createObjectURL(data);
     $('.d_goals a').attr('href', textFile);
 });
 
 $('#second button').click(function() {
     // download markdown file
-    var data = new Blob([$('#editor textarea').val()], {type: 'text/plain;charset=utf-8'});
+    let data = new Blob([$('#editor textarea').val()], {type: 'text/plain;charset=utf-8'});
     let textFile = URL.createObjectURL(data);
     $('#second a').attr('href', textFile);
 });
@@ -210,7 +208,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     // Button that triggered the modal
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this);
+    let modal = $(this);
     modal.find('.modal-title').text('Event');
 });
 
