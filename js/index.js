@@ -106,7 +106,8 @@ function finished() {
 function delete_goals(message, datetime) {
     // delete goal from screen and storage
     var to_delete = [message+';'+datetime];
-    var index = find_goals(goals, to_delete);
+    var index = find_goals(goals, to_delete) - 1;
+    console.log(index);
     let to_done = goals.pop(index);
     localStorage.goals = goals;
     goals = localStorage.goals;
