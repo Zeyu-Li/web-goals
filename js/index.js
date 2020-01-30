@@ -134,6 +134,10 @@ function addToTextArea(data) {
     $('#editor textarea').val(data);
 }
 
+function clear() {
+    $(".form-group textarea").val('');
+}
+
 $.get('../markdown/TODO.md', function (data) {
     // from data in json, copy to textarea
     addToTextArea(data);
@@ -145,6 +149,7 @@ $.get('../markdown/TODO.md', function (data) {
 $('.add_event').click(function() {
     // call add event
     add_goals($('#message-text').val(), $('#datetimepicker').val());
+    clear();
 });
 // end of events
 
@@ -156,7 +161,7 @@ $('#first button').click(function() {
 
 $('.d_goals button').click(function() {
     // download markdown file
-    let data = new Blob([localStorage.goals + "`" + localStorage.fgoals], {type: 'text/plain;charset=utf-8'});
+    let data = new Blob([localStorage.goals], {type: 'text/plain;charset=utf-8'});
     let textFile = URL.createObjectURL(data);
     $('.d_goals a').attr('href', textFile);
 });
@@ -206,7 +211,6 @@ $('#finished_goals > p').click(function() {
 $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     // Button that triggered the modal
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     let modal = $(this);
     modal.find('.modal-title').text('Event');
