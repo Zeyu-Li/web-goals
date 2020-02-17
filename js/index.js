@@ -18,10 +18,14 @@ var todo = localStorage.todo;
 let isLocal = localStorage.isLocal != 'false';
 // adds to markdown editor
 if (isLocal) {
-    $.get('../markdown/TODO.md', function (data) {
-        // from data in json, copy to textarea
-        addToTextArea(data);
-    }, 'text');
+    try {
+        $.get('../markdown/TODO.md', function (data) {
+            // from data in json, copy to textarea
+            addToTextArea(data);
+        }, 'text');
+    } catch(error) {
+        console.log("This is a local computer. Not a running server");
+    }
 } else {
     addToTextArea(todo);
 }
@@ -32,9 +36,16 @@ function remove(phase) {
     // find if var to delete is found in goals array
     let splitGoals = goals.toString().split(",");
     let tmp = localStorage.goals;
-    let length = phase.length
-    // TODO: fix easing a goal
-    console.log("Erase:", tmp.slice(0,tmp.indexOf(phase)) + tmp.slice(tmp.indexOf(phase)+length))
+    let length = phase.length;
+    let startPhase = tmp.indexOf(phase);
+    console.log(tmp);
+    if (startPhase <= 5) {
+        localStorage.goals = tmp.slice(0,tmp.indexOf(phase)) + tmp.slice(tmp.indexOf(phase)+length+1);
+    } else if (startPhase >= tmp.length - startPhase - 5) {
+        localStorage.goals = tmp.slice(0,tmp.indexOf(phase)-1) + tmp.slice(tmp.indexOf(phase)+length);
+    } else {
+        localStorage.goals = tmp.slice(0,tmp.indexOf(phase)-1) + tmp.slice(tmp.indexOf(phase)+length-1);
+    }
 }
 
 function delete_goals(phase) {
@@ -168,8 +179,18 @@ function save() {
 // add events
 $('.add_event').click(function() {
     // call add event
-    add_goals($('#message-text').val(), $('#datetimepicker').val());
-    clear();
+
+    // message must be greater than a length of 2 and not nothing
+    // otherwise, a message is displayed
+    if ($('#message-text').val().length <= 1) {
+        console.log($('#message-text').val().length <= 1 || $('#message-text').val());
+        alert("Message is too short");
+    } else if ($('#datetimepicker').val().length <= 4) {
+        alert("That date picked is not right. Try again");
+    } else {
+        add_goals($('#message-text').val(), $('#datetimepicker').val());
+        clear();
+    }
 });
 // end of add events
 
@@ -180,7 +201,16 @@ $('#first button').click(function() {
 
     // get time now and set it to default
     let dtnow = new Date();
-    let time_now = dtnow.toLocaleDateString("en-US") + " " + dtnow.getHours()+":"+dtnow.getMinutes();
+    let hours = dtnow.getHours();
+    let minutes = dtnow.getMinutes();
+    // if less than 10, add leading 0
+    if ( hours <= 9) {
+        hours = "0" + hours.toString();
+    }
+    if (minutes <= 9) {
+        minutes = "0" + minutes.toString();
+    }
+    let time_now = dtnow.toLocaleDateString("en-US") + " " + hours+":"+minutes;
     $('#datetimepicker').val(time_now);
 });
 
@@ -219,6 +249,7 @@ $(".copy .deleter").click(function() {
     $(".copy .deleter").text("Deleted");
     fgoals = [];
     localStorage.fgoals = fgoals;
+    $('.finished_goals').empty();
 })
 /* End of buttons */
 
@@ -256,7 +287,7 @@ $(document).ready(function () {
     get_data();
     finished();
     // return to top
-    return $("html, body").animate({
+    $("html, body").animate({
         scrollTop: 0
     }, 300), !1;
 
