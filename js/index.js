@@ -3,12 +3,15 @@
 // inits if empty
 if (localStorage.todo == undefined) {
     localStorage.todo = [];
-} else if (localStorage.goals == undefined) {
+}
+if (localStorage.goals == undefined) {
     localStorage.goals = [];
-} else if (localStorage.fgoals == undefined) {
+}
+if (localStorage.fgoals == undefined) {
     localStorage.fgoals = [];
-} else if (localStorage.isLocal == undefined) {
-    localStorage.isLocal == false;
+}
+if (localStorage.isLocal == undefined || localStorage.isLocal != "true") {
+    localStorage.isLocal = false;
 }
 
 // global inits
@@ -16,20 +19,6 @@ var goals = localStorage.goals;
 var fgoals = localStorage.fgoals;
 var todo = localStorage.todo;
 let isLocal = localStorage.isLocal != 'false';
-// adds to markdown editor
-if (isLocal) {
-    try {
-        $.get('../markdown/TODO.md', function (data) {
-            // from data in json, copy to textarea
-            addToTextArea(data);
-        }, 'text');
-    } catch(error) {
-        console.log("This is a local computer. Not a running server");
-    }
-} else {
-    addToTextArea(todo);
-}
-
 
 // functions
 function remove(phase) {
@@ -286,6 +275,21 @@ $(document).ready(function () {
     // on load
     get_data();
     finished();
+
+    // adds to markdown editor
+    if (isLocal) {
+        try {
+            $.get('../markdown/TODO.md', function (data) {
+                // from data in json, copy to textarea
+                addToTextArea(data);
+            }, 'text');
+        } catch(error) {
+            console.log("This is a local computer. Not a running server");
+            addToTextArea(todo);
+        }
+    } else {
+        addToTextArea(todo);
+    }
     // return to top
     $("html, body").animate({
         scrollTop: 0

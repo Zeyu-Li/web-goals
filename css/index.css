@@ -121,6 +121,7 @@ table {
 #editor {
     /* markdown editor must be not larger than 85% of screen height */
     max-height: 85vh!important;
+    min-height: 75vh!important;
 }
 
 .editor-toolbar {
