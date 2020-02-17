@@ -118,6 +118,11 @@ table {
 /* end of goals */
 
 /* editor */
+#editor {
+    /* markdown editor must be not larger than 85% of screen height */
+    max-height: 85vh!important;
+}
+
 .editor-toolbar {
     z-index: 0!important;
 }
@@ -158,41 +163,4 @@ table {
 .backtotop:hover {
     
     text-decoration: none;
-}
-
-/* flash (Not in use) */
-
-.flash {
-    -moz-animation: flash 1s ease-out;
-    -moz-animation-iteration-count: 1;
-
-    -webkit-animation: flash 1s ease-out;
-    -webkit-animation-iteration-count: 1;
-
-    -ms-animation: flash 1s ease-out;
-    -ms-animation-iteration-count: 1;
-}
-
-@keyframes flash {
-    0% { background-color: transparent; }
-    50% { background-color: #fbf8b2; }
-    100% { background-color: transparent; }
-}
-
-@-webkit-keyframes flash {
-    0% { background-color: transparent; }
-    50% { background-color: #fbf8b2; }
-    100% { background-color: transparent; }
-}
-
-@-moz-keyframes flash {
-    0% { background-color: transparent; }
-    50% { background-color: #fbf8b2; }
-    100% { background-color: transparent; }
-}
-
-@-ms-keyframes flash {
-    0% { background-color: transparent; }
-    50% { background-color: #fbf8b2; }
-    100% { background-color: transparent; }
 }

@@ -1,8 +1,75 @@
 'use strict';
 
+// inits if empty
+if (localStorage.todo == undefined) {
+    localStorage.todo = [];
+} else if (localStorage.goals == undefined) {
+    localStorage.goals = [];
+} else if (localStorage.fgoals == undefined) {
+    localStorage.fgoals = [];
+} else if (localStorage.isLocal == undefined) {
+    localStorage.isLocal == false;
+}
+
 // global inits
 var goals = localStorage.goals;
 var fgoals = localStorage.fgoals;
+var todo = localStorage.todo;
+let isLocal = localStorage.isLocal != 'false';
+// adds to markdown editor
+if (isLocal) {
+    $.get('../markdown/TODO.md', function (data) {
+        // from data in json, copy to textarea
+        addToTextArea(data);
+    }, 'text');
+} else {
+    addToTextArea(todo);
+}
+
+
+// functions
+function remove(phase) {
+    // find if var to delete is found in goals array
+    let splitGoals = goals.toString().split(",");
+    let tmp = localStorage.goals;
+    let length = phase.length
+    // TODO: fix easing a goal
+    console.log("Erase:", tmp.slice(0,tmp.indexOf(phase)) + tmp.slice(tmp.indexOf(phase)+length))
+}
+
+function delete_goals(phase) {
+    // delete goal from screen and storage
+    let to_done = remove(phase);
+    goals = localStorage.goals;
+    get_data();
+    add_f_goals(phase);
+}
+
+function add_f_goals(to_done) {
+    // add finished goals to finished screen and storage
+    fgoals.push([to_done]);
+    localStorage.fgoals = fgoals;
+    fgoals = localStorage.fgoals;
+    finished();
+}
+
+function add_goals(message, datetime) {
+    // add goals to screen and storage
+    goals.push([message+';'+datetime]);
+    localStorage.goals = goals;
+    goals = localStorage.goals;
+    get_data();
+}
+
+function addToTextArea(data) {
+    // from data in json, copy to textarea
+    $('#editor textarea').val(data);
+}
+
+function clear() {
+    // clears text area
+    $(".form-group textarea").val('');
+}
 
 // data for info
 function get_data() {
@@ -25,11 +92,11 @@ function get_data() {
     // print the goals out
     let i = 0;
     for (let to_print_goal of split_goal) {
-        if (to_print_goal[0] =="") {
+        if (to_print_goal[0] == "") {
             break;
         }
 
-        // formate date
+        // formats date
         let date = to_print_goal[0];
         let dob = new Date(date);
         if (dob.getTime() <= $.now()) {
@@ -48,23 +115,12 @@ function get_data() {
                 <script>
                     $('.goal_`+i+`').click(function() {
                         $('#goal_number_`+ i +`').css('background-color', 'green');
-                        delete_goals("`+to_print_goal[1]+`","`+to_print_goal[0]+`");
+                        delete_goals("`+to_print_goal[1]+`;`+date+`");
                     });
                 </script>
             </div>`
         );
         i++;
-    }
-}
-
-function find_goals(goals, to_delete) {
-    // find if var to delete is found in goals array
-    let j = 0;
-    for (let goal of goals) {
-        if (goal == to_delete) {
-            return j;
-        };
-        j++;
     }
 }
 
@@ -99,64 +155,40 @@ function finished() {
         );
         i++;
     }
-
 }
 
-function delete_goals(message, datetime) {
-    // delete goal from screen and storage
-    let to_delete = [message+';'+datetime];
-    let index = find_goals(goals, to_delete) - 1;
-    let to_done = goals.pop(index);
-    localStorage.goals = goals;
-    goals = localStorage.goals;
-    get_data();
-    add_f_goals(to_done);
+function save() {
+    todo = $('#editor textarea').val();
+    localStorage.todo = todo;
 }
-
-function add_f_goals(to_done) {
-    // add finished goals to finished screen and storage
-    fgoals.push([to_done]);
-    localStorage.fgoals = fgoals;
-    fgoals = localStorage.fgoals;
-    finished();
-}
-
-function add_goals(message, datetime) {
-    // add goals to screen and storage
-    goals.push([message+';'+datetime]);
-    localStorage.goals = goals;
-    goals = localStorage.goals;
-    get_data();
-}
-
-function addToTextArea(data) {
-    // from data in json, copy to textarea
-    $('#editor textarea').val(data);
-}
-
-function clear() {
-    $(".form-group textarea").val('');
-}
-
-$.get('../markdown/TODO.md', function (data) {
-    // from data in json, copy to textarea
-    addToTextArea(data);
-}, 'text');
+// end of functions
 
 /* Start of buttons */
 
-// events
+// add events
 $('.add_event').click(function() {
     // call add event
     add_goals($('#message-text').val(), $('#datetimepicker').val());
     clear();
 });
-// end of events
+// end of add events
 
 // add event
 $('#first button').click(function() {
     // get datetime
     $('#datetimepicker').datetimepicker();
+
+    // get time now and set it to default
+    let dtnow = new Date();
+    let time_now = dtnow.toLocaleDateString("en-US") + " " + dtnow.getHours()+":"+dtnow.getMinutes();
+    $('#datetimepicker').val(time_now);
+});
+
+$('#second button').click(function() {
+    // saves markdown file
+    let data = new Blob([$('#editor textarea').val()], {type: 'text/plain;charset=utf-8'});
+    let textFile = URL.createObjectURL(data);
+    $('#second a').attr('href', textFile);
 });
 
 $('.d_goals button').click(function() {
@@ -166,45 +198,28 @@ $('.d_goals button').click(function() {
     $('.d_goals a').attr('href', textFile);
 });
 
-$('#second button').click(function() {
-    // download markdown file
-    let data = new Blob([$('#editor textarea').val()], {type: 'text/plain;charset=utf-8'});
-    let textFile = URL.createObjectURL(data);
-    $('#second a').attr('href', textFile);
-});
-
-$(".copy button").click(function() {
+$(".copy .copy_btn").click(function() {
     // when copy button is clicked, the text in textarea is copied to clipboard 
-    $(".copy button").addClass("btn-success");
-    $(".copy button").text("Copied");
+    $(".copy .copy_btn").addClass("btn-success");
+    $(".copy .copy_btn").text("Copied");
     navigator.clipboard.writeText($('#editor textarea').val());
 })
 
-// toggle dark mode on load
-if (localStorage.dark == "0") {
-    $('#customSwitch1').trigger("click");
-    $('body').css("background-color", "#e6e6e6");
-    $('body').css("color", "#222");
-}
+$(".copy .save").click(function() {
+    // when copy button is clicked, the text in textarea is copied to clipboard 
+    $(".copy .save").addClass("btn-success");
+    $(".copy .save").text("Saved");
+    save();
+})
+/* End of buttons */
 
-$('#customSwitch1').click(function() {
-    if (localStorage.dark == "1") {
-        $('body').css("background-color", "#e6e6e6");
-        $('body').css("color", "#222");
-        localStorage.dark = 0;
-    } else {
-        $('body').css("background-color", "#222");
-        $('body').css("color", "#e6e6e6");
-        localStorage.dark = 1;
-    }
-});
-// end of toggle dark mode
-
-// expand finished goals
-$('#finished_goals > p').click(function() {
-    $('.finished_goals').slideToggle();
-});
-
+$(".copy .deleter").click(function() {
+    // when copy button is clicked, the text in textarea is copied to clipboard 
+    $(".copy .deleter").addClass("btn-success");
+    $(".copy .deleter").text("Deleted");
+    fgoals = [];
+    localStorage.fgoals = fgoals;
+})
 /* End of buttons */
 
 // popup event
@@ -216,16 +231,47 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     modal.find('.modal-title').text('Event');
 });
 
+$(document).ready(function () {
+    // toggle dark mode on load
+    if (localStorage.dark == "0") {
+        $('#customSwitch1').trigger("click");
+        $('body').css("background-color", "#e6e6e6");
+        $('body').css("color", "#222");
+    }
+    
+    $('#customSwitch1').click(function() {
+        if (localStorage.dark == "1") {
+            $('body').css("background-color", "#e6e6e6");
+            $('body').css("color", "#222");
+            localStorage.dark = 0;
+        } else {
+            $('body').css("background-color", "#222");
+            $('body').css("color", "#e6e6e6");
+            localStorage.dark = 1;
+        }
+    });
+    // end of toggle dark mode
+    // get completed and goals that need to be done
+    // on load
+    get_data();
+    finished();
+    // return to top
+    return $("html, body").animate({
+        scrollTop: 0
+    }, 300), !1;
+
+    // save data every 100 minutes
+    setInterval(function(){ save(); }, 6000000);
+});
+
+// expand/see finished goals
+$('#finished_goals > p').click(function() {
+    $('.finished_goals').slideToggle();
+});
+
 // back to top
 $(".backtotop").click(function() {
     return $("html, body").animate({
         scrollTop: 0
     }, 300), !1;
-});
-
-$(document).ready(function () {
-    // get completed and goals that need to be done
-    // on load
-    get_data();
-    finished();
 });
