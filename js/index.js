@@ -109,7 +109,7 @@ function get_data() {
             `<div class="ind_goal" id="goal_number_`+i+`" style="`+color+`">
                 <div class="check_box"><input class="main_box goal_`+i+`" type="checkbox" name="goal`+i+`" value="goal`+i+`" style="float: left;"></div>
                 <div class="txt">
-                    <p>` + to_print_goal[1] + `<br><br>
+                    <p>` + decodeURI(to_print_goal[1]) + `<br><br>
                     <b>DUE: `+dobFormat+`</b></p>
                 </div>
                 <script>
@@ -148,7 +148,7 @@ function finished() {
         $('.finished_goals').prepend(
             `<div class="ind_goal" id="goal_number_`+i+`">
                 <div class="txt">
-                    <p>` + to_f_goal[1] + `<br><br>
+                    <p>` + decodeURI(to_f_goal[1]) + `<br><br>
                     <b>DUE: `+dobFormat+`</b></p>
                 </div>
             </div>`
@@ -177,7 +177,7 @@ $('.add_event').click(function() {
     } else if ($('#datetimepicker').val().length <= 4) {
         alert("That date picked is not right. Try again");
     } else {
-        add_goals($('#message-text').val(), $('#datetimepicker').val());
+        add_goals(encodeURI($('#message-text').val()), $('#datetimepicker').val());
         clear();
     }
 });

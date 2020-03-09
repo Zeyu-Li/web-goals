@@ -9,7 +9,7 @@ You can run on a local server or just put in shell:startup for Windows.
 
 ![screenshot](images/screenshot.png)
 
-* important, input is not sanitized, therefore no **double quotation** character
+* important, date input is not sanitized, but the text input is sanitized
 
 ## How to use
 
