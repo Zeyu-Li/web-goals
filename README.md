@@ -9,6 +9,8 @@ You can run on a local server or just put in shell:startup for Windows.
 
 ![screenshot](images/screenshot.png)
 
+* important, input is not sanitized, therefore no **double quotation** character
+
 ## How to use
 
 Click the (+) button on the bottom right corner to add a goal.
