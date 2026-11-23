@@ -9,7 +9,7 @@ You can run on a local server or just put in shell:startup for Windows.
 
 ![screenshot](images/screenshot.png)
 
-* important, date input is not sanitized, but the text input is sanitized
+* Goal text and dates are shown as plain text, never interpreted as HTML
 
 ## How to use
 
