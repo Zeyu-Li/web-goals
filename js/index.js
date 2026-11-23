@@ -105,21 +105,23 @@ function get_data() {
         }
         let dobArr = dob.toDateString().split(' ');
         let dobFormat = dobArr[1] + ' ' + dobArr[2]  + ' ' + dobArr[3];
-        $('.goals').prepend(
+        const goalElement = $(
             `<div class="ind_goal" id="goal_number_`+i+`" style="`+color+`">
                 <div class="check_box"><input class="main_box goal_`+i+`" type="checkbox" name="goal`+i+`" value="goal`+i+`" style="float: left;"></div>
                 <div class="txt">
-                    <p>` + decodeURI(to_print_goal[1]) + `<br><br>
+                    <p><br><br>
                     <b>DUE: `+dobFormat+`</b></p>
                 </div>
-                <script>
-                    $('.goal_`+i+`').click(function() {
-                        $('#goal_number_`+ i +`').css('background-color', 'green');
-                        delete_goals("`+to_print_goal[1]+`;`+date+`");
-                    });
-                </script>
             </div>`
         );
+        // goal text and date are user input: add them as text, never as HTML or script
+        goalElement.find('.txt p').prepend(document.createTextNode(decodeURI(to_print_goal[1])));
+        const goalToDelete = to_print_goal[1] + ';' + date;
+        goalElement.find('.main_box').click(function() {
+            goalElement.css('background-color', 'green');
+            delete_goals(goalToDelete);
+        });
+        $('.goals').prepend(goalElement);
         i++;
     }
 }
@@ -145,14 +147,16 @@ function finished() {
         let ddob = new Date(date);
         let dobArr = ddob.toDateString().split(' ');
         let dobFormat = dobArr[1] + ' ' + dobArr[2]  + ' ' + dobArr[3];
-        $('.finished_goals').prepend(
+        const finishedElement = $(
             `<div class="ind_goal" id="goal_number_`+i+`">
                 <div class="txt">
-                    <p>` + decodeURI(to_f_goal[1]) + `<br><br>
+                    <p><br><br>
                     <b>DUE: `+dobFormat+`</b></p>
                 </div>
             </div>`
         );
+        finishedElement.find('.txt p').prepend(document.createTextNode(decodeURI(to_f_goal[1])));
+        $('.finished_goals').prepend(finishedElement);
         i++;
     }
 }
